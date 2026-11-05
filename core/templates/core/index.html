@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% block title %}Kalikote Group - Tech Solutions, Courses & Support{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="relative gradient-bg">
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-24">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div data-aos="fade-up">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-brand-800 leading-tight">
+          Tech Solutions, Courses & Individual Support <br>
+          <span class="text-brand-600">All in One Place</span>
+        </h1>
+        <p class="mt-4 text-slate-600 text-lg">
+          We Provide Support for all the systems solutions like Servers, Network, Automation, Security, Cloud and VAPT Services for All Enterprise Level.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/services" class="inline-flex items-center rounded-2xl px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-soft">Explore Services</a>
+          <a href="/courses" class="inline-flex items-center rounded-2xl px-5 py-3 bg-white hover:bg-brand-50 text-brand-800 font-semibold shadow-soft">View Courses</a>
+        </div>
+      </div>
+      <div class="relative" data-aos="zoom-in">
+        <div class="absolute -inset-6 bg-gradient-to-tr from-brand-200 to-white rounded-3xl blur-xl opacity-70"></div>
+        <div class="relative glass rounded-3xl p-6 shadow-soft">
+          <!-- dashboard-style mock cards -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl p-5 bg-white shadow-soft">
+              <div class="text-sm text-slate-500">Automation</div>
+              <div class="mt-2 text-2xl font-bold text-brand-700">Workflows</div>
+              <div class="mt-3 h-2 rounded-full bg-brand-100">
+                <div class="h-2 w-3/4 rounded-full bg-brand-600"></div>
+              </div>
+            </div>
+            <div class="rounded-2xl p-5 bg-white shadow-soft">
+              <div class="text-sm text-slate-500">Uptime</div>
+              <div class="mt-2 text-2xl font-bold text-brand-700">99.9%</div>
+              <div class="mt-3 h-24 rounded-xl bg-gradient-to-br from-brand-100 to-white"></div>
+            </div>
+            <div class="col-span-2 rounded-2xl p-5 bg-white shadow-soft">
+              <div class="flex justify-between items-center">
+                <div class="text-sm text-slate-500">Active Learners</div>
+                <div class="text-xs px-2 py-1 rounded-full bg-brand-100 text-brand-700">Live</div>
+              </div>
+              <div class="mt-2 text-3xl font-bold text-brand-700">1,250+</div>
+              <div class="mt-4 grid grid-cols-4 gap-2">
+                <div class="h-2 bg-brand-200 rounded"></div>
+                <div class="h-2 bg-brand-300 rounded"></div>
+                <div class="h-2 bg-brand-400 rounded"></div>
+                <div class="h-2 bg-brand-500 rounded"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /mock cards -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Services Summary -->
+<section class="py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold text-brand-800">What We Do</h2>
+    <p class="mt-3 text-slate-600">End-to-end IT solutions for enterprises.</p>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for card in services|slice:":3" %}
+      <div class="rounded-2xl p-6 bg-white shadow-soft hover:shadow-lg transition">
+        <div class="text-3xl">{{ card.icon }}</div>
+        <h3 class="mt-3 text-xl font-semibold text-brand-700">{{ card.title }}</h3>
+        <p class="mt-2 text-sm text-slate-600">{{ card.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <a href="/services" class="mt-8 inline-block btn-secondary">See All Services →</a>
+  </div>
+</section>
+
+<!-- Stats / Achievements -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6 grid sm:grid-cols-3 gap-8 text-center">
+    <div>
+      <div class="text-4xl font-bold text-brand-700">50+</div>
+      <p class="mt-2 text-slate-600">Enterprise Clients</p>
+    </div>
+    <div>
+      <div class="text-4xl font-bold text-brand-700">99.9%</div>
+      <p class="mt-2 text-slate-600">System Uptime Delivered</p>
+    </div>
+    <div>
+      <div class="text-4xl font-bold text-brand-700">10+ Years</div>
+      <p class="mt-2 text-slate-600">Industry Experience</p>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold text-brand-800">Technologies We Work With</h2>
+    <div class="mt-8 flex flex-wrap justify-center gap-6 text-slate-600 text-lg">
+      <span>🖥️ Servers</span>
+      <span>🌐 Networking</span>
+      <span>⚙️ Automation</span>
+      <span>☁️ AWS / Azure / GCP</span>
+      <span>🔒 Security</span>
+      <span>🛡️ VAPT</span>
+    </div>
+  </div>
+</section>
+
+<!-- Courses highlight -->
+<section id="courses" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div data-aos="fade-right">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-800">Learn by Building</h2>
+        <p class="mt-3 text-slate-600">
+          Real projects, labs, and mentorship. Beginner to advanced tracks in DevOps, Cloud (AWS/Azure), Python, Web, Security (VAPT).
+        </p>
+        <ul class="mt-6 space-y-3 text-slate-700">
+          <li>✔ Project-first curriculum & capstones</li>
+          <li>✔ Doubt-clearing sessions & community</li>
+          <li>✔ Certificates & career guidance</li>
+        </ul>
+        <a href="/contact" class="mt-6 inline-flex rounded-2xl px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-soft">Enroll Now</a>
+      </div>
+      <div data-aos="fade-left">
+        <div class="rounded-3xl p-6 bg-gradient-to-br from-brand-50 to-white shadow-soft">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-2xl p-4 bg-white shadow">
+              <div class="text-sm text-slate-500">DevOps Bootcamp</div>
+              <div class="text-lg font-bold text-brand-700">8 Weeks</div>
+            </div>
+            <div class="rounded-2xl p-4 bg-white shadow">
+              <div class="text-sm text-slate-500">Cloud Essentials</div>
+              <div class="text-lg font-bold text-brand-700">6 Weeks</div>
+            </div>
+            <div class="rounded-2xl p-4 bg-white shadow">
+              <div class="text-sm text-slate-500">Python for Automation</div>
+              <div class="text-lg font-bold text-brand-700">6 Weeks</div>
+            </div>
+            <div class="rounded-2xl p-4 bg-white shadow">
+              <div class="text-sm text-slate-500">Web Security (VAPT)</div>
+              <div class="text-lg font-bold text-brand-700">4 Weeks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold text-brand-800">What Our Clients Say</h2>
+    <div class="mt-10 grid md:grid-cols-2 gap-8">
+      <div class="p-6 bg-white rounded-2xl shadow-soft">
+        <p class="text-slate-600">"Kalikote Group modernized our server infrastructure and improved uptime across all regions."</p>
+        <div class="mt-4 font-semibold text-brand-700">CTO, Enterprise Client</div>
+      </div>
+      <div class="p-6 bg-white rounded-2xl shadow-soft">
+        <p class="text-slate-600">"Their VAPT service identified critical issues we never knew existed and helped us fix them fast."</p>
+        <div class="mt-4 font-semibold text-brand-700">Security Lead, SaaS Company</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Support -->
+<section id="support" class="py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold text-brand-800">Get Individual Tech Support</h2>
+      <p class="mt-3 text-slate-600">
+        Stuck on deployment, Windows/Python automation, or network issues? Get one-on-one help from specialists.
+      </p>
+    </div>
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+    {% for s in supports %}
+        <div class="rounded-2xl p-6 bg-white shadow-soft hover:shadow-lg transition" data-aos="zoom-in">
+        <h3 class="text-lg font-semibold text-brand-700">{{ s.t }}</h3>
+        <p class="mt-2 text-sm text-slate-600">{{ s.d }}</p>
+        </div>
+    {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 text-center">
+  <h2 class="text-3xl font-bold text-brand-800">Ready to work together?</h2>
+  <p class="mt-3 text-slate-600">Let’s strengthen your enterprise IT foundation.</p>
+  <a href="/contact" class="mt-6 inline-block btn-primary">Get in Touch</a>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- Contact -->
+<section id="contact" class="py-20">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="rounded-3xl p-8 bg-white shadow-soft" data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-brand-800">Contact Us</h2>
+      <p class="mt-2 text-slate-600">Have a project or have any query? Send a message.</p>
+      <form method="post" action="{% url 'contact' %}" class="mt-6 grid gap-4">
+        {% csrf_token %}
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="name" name="name" type="text" placeholder="Your Name" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+          <input id="email" name="email" type="email" placeholder="Email" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+        </div>
+        <input id="subject" name="subject" type="text" placeholder="Subject" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+        <textarea id="message" name="message" rows="5" placeholder="Message" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none"></textarea>
+        <button type="submit" class="mt-4 flex justify-center items-center rounded-2xl px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-soft">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

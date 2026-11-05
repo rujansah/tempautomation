@@ -1,0 +1,879 @@
+{% extends 'base.html' %} {% block title %}Generate Certificate - Kalikote
+Group{% endblock %} {% block head_extra %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css"
+/>
+
+<style>
+/* Highlight the selected certificate type */
+input[name="certificate_type"]:checked + span {
+    background-color: #E0F2FE;  /* light blue, adjust to your brand color */
+    border-color: #3B82F6;      /* blue border */
+    color: #1E40AF;             /* dark blue text */
+}
+</style>
+
+
+{% endblock %} {% block content %}
+
+<!-- Logout Button -->
+<div class="max-w-7xl mx-auto px-4 py-6 flex justify-end">
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button
+      type="submit"
+      class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl font-semibold transition"
+    >
+      Logout
+    </button>
+  </form>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-6">
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Form Section -->
+    <div class="lg:w-1/2 bg-white rounded-2xl shadow-soft p-8 sm:p-10">
+      <h2 class="text-2xl font-bold text-center text-brand-700 mb-6">
+        Certificate Generator
+      </h2>
+
+      <form id="certificateForm" class="flex flex-col gap-4">
+        {% csrf_token %}
+
+        <!-- Certificate Type -->
+        <div class="flex flex-wrap gap-4 justify-center mb-4">
+          <label class="cursor-pointer">
+            <input
+              type="radio"
+              name="certificate_type"
+              value="internship_certificate"
+              class="hidden"
+              required
+            />
+            <span
+              class="inline-block px-6 py-3 rounded-xl border border-gray-300 hover:bg-brand-100 text-gray-700 transition"
+            >
+              Internship Certificate
+            </span>
+          </label>
+          <label class="cursor-pointer">
+            <input
+              type="radio"
+              name="certificate_type"
+              value="employment_certificate"
+              class="hidden"
+            />
+            <span
+              class="inline-block px-6 py-3 rounded-xl border border-gray-300 hover:bg-brand-100 text-gray-700 transition"
+            >
+              Employment Certificate
+            </span>
+          </label>
+          <label class="cursor-pointer">
+            <input
+              type="radio"
+              name="certificate_type"
+              value="course_certificate"
+              class="hidden"
+            />
+            <span
+              class="inline-block px-6 py-3 rounded-xl border border-gray-300 hover:bg-brand-100 text-gray-700 transition"
+            >
+              Course Certificate
+            </span>
+          </label>
+        </div>
+
+        <!-- Dynamic Fields -->
+        <div id="certificateFields" class="hidden flex flex-col gap-4">
+          <!-- Name -->
+          <div>
+            <label class="block mb-1 font-medium">Name</label>
+            <input
+              type="text"
+              name="name"
+              required
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            />
+          </div>
+
+          <!-- Position (conditionally visible) -->
+          <div id="positionFields" class="hidden">
+            <label class="block mb-1 font-medium">Position</label>
+            <input
+              type="text"
+              name="position"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            />
+          </div>
+
+          <!-- Course Fields (conditionally visible) -->
+          <div id="courseFields" class="hidden flex flex-col gap-4">
+            <div>
+              <label class="block mb-1 font-medium">Course Name</label>
+              <select
+                id="courseSelect"
+                name="course_name"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              >
+                <option value="">Select Course</option>
+                <option value="Cisco Certified Internetwork Expert (CCIE)">
+                  Cisco Certified Internetwork Expert (CCIE)
+                </option>
+                <option value="Certified Ethical Hacker (CEH)">
+                  Certified Ethical Hacker (CEH)
+                </option>
+                <option
+                  value="Certified Information Systems Security Professional (CISSP)"
+                >
+                  CISSP
+                </option>
+                <option value="Certified Information Security Manager (CISM)">
+                  CISM
+                </option>
+                <option value="CompTIA Security+">CompTIA Security+</option>
+                <option
+                  value="Offensive Security Certified Professional (OSCP)"
+                >
+                  OSCP
+                </option>
+                <option value="GIAC Security Essentials (GSEC)">GSEC</option>
+                <option value="GIAC Certified Intrusion Analyst (GCIA)">
+                  GCIA
+                </option>
+                <option value="GIAC Certified Incident Handler (GCIH)">
+                  GCIH
+                </option>
+                <option value="Cisco Certified Network Associate (CCNA)">
+                  CCNA
+                </option>
+                <option value="Cisco Certified Network Professional (CCNP)">
+                  CCNP
+                </option>
+                <option value="CompTIA Network+">CompTIA Network+</option>
+                <option
+                  value="Juniper Networks Certified Internet Associate (JNCIA)"
+                >
+                  JNCIA
+                </option>
+                <option
+                  value="Juniper Networks Certified Internet Specialist (JNCIS)"
+                >
+                  JNCIS
+                </option>
+                <option
+                  value="Juniper Networks Certified Internet Professional (JNCIP)"
+                >
+                  JNCIP
+                </option>
+                <option value="Advanced Cybersecurity Analyst (ACSA)">
+                  ACSA
+                </option>
+                <option value="Microsoft Certified Solutions Associate (MCSA)">
+                  MCSA
+                </option>
+                <option value="Microsoft Certified Solutions Expert (MCSE)">
+                  MCSE
+                </option>
+                <option value="Microsoft Azure Fundamentals (AZ-900)">
+                  AZ-900
+                </option>
+                <option value="Microsoft Azure Administrator (AZ-104)">
+                  AZ-104
+                </option>
+                <option value="Microsoft Azure Solutions Architect (AZ-305)">
+                  AZ-305
+                </option>
+                <option value="Microsoft 365 Fundamentals (MS-900)">
+                  MS-900
+                </option>
+                <option value="Microsoft 365 Security Administrator (MS-500)">
+                  MS-500
+                </option>
+                <option value="Amazon Web Services (AWS)">AWS</option>
+                <option value="Google Cloud Platform (GCP)">GCP</option>
+                <option value="VMware Certified Professional (VCP)">VCP</option>
+                <option value="Red Hat Certified System Administrator (RHCSA)">
+                  RHCSA
+                </option>
+                <option value="Red Hat Certified Engineer (RHCE)">RHCE</option>
+                <option value="Project Management Professional (PMP)">
+                  PMP
+                </option>
+                <option value="ITIL Foundation">ITIL Foundation</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block mb-1 font-medium">Course Outcome</label>
+              <input
+                type="text"
+                name="course_outcome"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-1 font-medium">Training Hours</label>
+              <input
+                type="text"
+                name="training_hours"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-1 font-medium">Course Coverage</label>
+              <input
+                id="courseCoverage"
+                name="course_coverage"
+                placeholder="Type topic and press Enter"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-1 font-medium">Commitment To</label>
+              <input
+                type="text"
+                name="commitment_to"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+          </div>
+
+          <!-- From & To Dates -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-1 font-medium">From Date</label>
+              <input
+                type="date"
+                name="from_date"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+            <div>
+              <label class="block mb-1 font-medium">To Date</label>
+              <input
+                type="date"
+                name="to_date"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full mt-4 bg-brand-600 text-white py-3 rounded-2xl font-semibold hover:bg-brand-700 transition"
+        >
+          Generate Certificate
+        </button>
+      </form>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="lg:w-1/2 bg-gray-50 rounded-2xl p-6 shadow-soft">
+      <h3 class="text-lg font-semibold mb-4 text-center">Live Preview</h3>
+      <div class="border rounded-2xl p-4 bg-white">
+        <img
+          id="certificatePreview"
+          class="mx-auto max-h-[600px] w-full hidden rounded-xl object-contain"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alerts -->
+<div id="customAlert" class="hidden fixed top-6 right-6 z-50">
+  <div id="alertBox" class="flex items-center gap-2 px-5 py-3 rounded-xl shadow-soft">
+    <span id="alertIcon">⚠</span>
+    <p id="alertMessage">Preview Failed</p>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div
+  id="loadingOverlay"
+  class="hidden fixed inset-0 bg-white/80 backdrop-blur flex items-center justify-center z-50"
+>
+  <div class="text-center bg-white p-10 rounded-2xl shadow-soft">
+    <div
+      class="w-16 h-16 border-4 border-gray-200 border-t-4 border-t-brand-600 rounded-full animate-spin mx-auto mb-4"
+    ></div>
+    <p class="font-medium">Generating and sending certificate...</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+
+<!-- optional if you want JS separated -->
+
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+
+<script>
+  const coverageInput = document.querySelector("#courseCoverage");
+  const tagify = new Tagify(coverageInput);
+
+  const previewImg = document.getElementById("certificatePreview");
+
+  function debounce(func, delay) {
+    let timeout;
+    return function () {
+      const context = this;
+      const args = arguments;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, delay);
+    };
+  }
+
+  function updatePreview() {
+    const type = document.querySelector(
+      "input[name='certificate_type']:checked",
+    );
+    if (!type) return;
+
+    const data = {
+      certificate_type: type.value,
+      name: document.querySelector("[name='name']").value,
+      position: document.querySelector("[name='position']").value,
+      from_date: document.querySelector("[name='from_date']").value,
+      to_date: document.querySelector("[name='to_date']").value,
+      course_name: document.querySelector("[name='course_name']").value,
+      course_outcome: document.querySelector("[name='course_outcome']").value,
+      training_hours: document.querySelector("[name='training_hours']").value,
+      course_coverage: tagify.value.map((t) => t.value),
+      commitment_to: document.querySelector("[name='commitment_to']").value,
+    };
+
+    fetch("{% url 'certificate_preview' %}", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        previewImg.src = URL.createObjectURL(blob);
+        previewImg.classList.remove("hidden");
+      })
+      .catch(() => showAlert("Preview failed"));
+  }
+
+  const debouncedPreview = debounce(updatePreview, 400);
+
+  // Ensure preview updates correctly with Tagify
+  tagify.on("add", debouncedPreview);
+  tagify.on("remove", debouncedPreview);
+  tagify.on("edit:updated", debouncedPreview);
+  tagify.on("change", debouncedPreview);
+
+  const radios = document.querySelectorAll("input[name='certificate_type']");
+  const certificateFields = document.getElementById("certificateFields");
+  const positionFields = document.getElementById("positionFields");
+  const courseFields = document.getElementById("courseFields");
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      // Show the main form once a type is selected
+      certificateFields.classList.remove("hidden");
+
+      // Hide sub-fields initially
+      positionFields.classList.add("hidden");
+      courseFields.classList.add("hidden");
+
+      // Show corresponding fields
+      if (
+        radio.value === "internship_certificate" ||
+        radio.value === "employment_certificate"
+      ) {
+        positionFields.classList.remove("hidden");
+      }
+
+      if (radio.value === "course_certificate") {
+        courseFields.classList.remove("hidden");
+      }
+    });
+  });
+
+  function showAlert(msg, type = "error") {
+    const alert = document.getElementById("customAlert");
+    const alertBox = document.getElementById("alertBox");
+    const icon = document.getElementById("alertIcon");
+    const message = document.getElementById("alertMessage");
+
+    message.textContent = msg;
+
+    // Remove previous classes
+    alertBox.classList.remove(
+      "bg-red-500", "bg-green-500", 
+      "text-white"
+    );
+
+    if (type === "success") {
+      alertBox.classList.add("bg-green-500", "text-white");
+      icon.textContent = "✅";
+    } else {
+      alertBox.classList.add("bg-red-500", "text-white");
+      icon.textContent = "⚠";
+    }
+
+    alert.classList.remove("hidden");
+
+    setTimeout(() => {
+      alert.classList.add("hidden");
+    }, 4000);
+  }
+
+  const courseData = {
+    "Cisco Certified Internetwork Expert (CCIE)": {
+      outcome:
+        "advanced knowledge and hands-on training in enterprise networking technologies and infrastructure design",
+      hours: "300",
+      coverage: [
+        "Advanced Routing Protocols (OSPF, EIGRP, BGP)",
+        "MPLS and VPN Technologies",
+        "Enterprise Switching (STP, VLAN, EtherChannel)",
+        "High Availability (HSRP, VRRP, GLBP)",
+        "Network Security Fundamentals",
+        "Network Automation and Python for Networking",
+        "SD-WAN and Enterprise Architecture Design",
+      ],
+      commitment: "mastering advanced enterprise networking concepts",
+    },
+
+    "Certified Ethical Hacker (CEH)": {
+      outcome:
+        "comprehensive knowledge and practical skills to identify vulnerabilities ethically",
+      hours: "300",
+      coverage: [
+        "Footprinting and Reconnaissance",
+        "Scanning Networks and Enumeration",
+        "System Hacking and Malware Threats",
+        "Web Application Hacking",
+        "Cryptography and Wireless Network Security",
+        "Penetration Testing Methodologies",
+      ],
+      commitment: "enhancing ethical hacking and cybersecurity expertise",
+    },
+
+    "Certified Information Systems Security Professional (CISSP)": {
+      outcome:
+        "advanced understanding of information security principles and enterprise security management",
+      hours: "300",
+      coverage: [
+        "Security and Risk Management",
+        "Asset Security",
+        "Security Architecture and Engineering",
+        "Communication and Network Security",
+        "Identity and Access Management",
+        "Security Assessment and Testing",
+        "Security Operations",
+      ],
+      commitment:
+        "strengthening enterprise-wide information security practices",
+    },
+
+    "Certified Information Security Manager (CISM)": {
+      outcome:
+        "expertise in managing, monitoring, and assessing enterprise information security programs",
+      hours: "300",
+      coverage: [
+        "Information Security Governance",
+        "Risk Management",
+        "Information Security Program Development",
+        "Information Security Incident Management",
+      ],
+      commitment: "enhancing skills in managing enterprise security programs",
+    },
+
+    "CompTIA Security+": {
+      outcome: "foundational knowledge and practical skills in cybersecurity",
+      hours: "200",
+      coverage: [
+        "Threats, Attacks, and Vulnerabilities",
+        "Identity and Access Management",
+        "Risk Management",
+        "Cryptography",
+        "Network Security",
+      ],
+      commitment: "building strong cybersecurity fundamentals",
+    },
+
+    "Offensive Security Certified Professional (OSCP)": {
+      outcome:
+        "practical penetration testing skills and real-world attack simulation expertise",
+      hours: "300",
+      coverage: [
+        "Penetration Testing Methodology",
+        "Network Scanning",
+        "Exploitation Techniques",
+        "Web Application Attacks",
+        "Post Exploitation",
+      ],
+      commitment: "mastering penetration testing skills",
+    },
+
+    "GIAC Security Essentials (GSEC)": {
+      outcome:
+        "foundational and advanced information security knowledge for professionals",
+      hours: "300",
+      coverage: [
+        "Access Control",
+        "Network Security",
+        "Cryptography",
+        "Security Policy",
+        "Incident Handling",
+      ],
+      commitment: "strengthening practical information security expertise",
+    },
+
+    "GIAC Certified Intrusion Analyst (GCIA)": {
+      outcome: "skills to detect and analyze network intrusions",
+      hours: "300",
+      coverage: [
+        "Network Traffic Analysis",
+        "Intrusion Detection Systems",
+        "Incident Handling",
+        "Protocol Analysis",
+      ],
+      commitment: "developing intrusion detection and analysis expertise",
+    },
+
+    "GIAC Certified Incident Handler (GCIH)": {
+      outcome: "incident handling and response skills",
+      hours: "300",
+      coverage: [
+        "Incident Handling",
+        "Network and Host Analysis",
+        "Malware Analysis",
+        "Attack Techniques",
+        "Threat Hunting",
+      ],
+      commitment: "mastering incident response and handling",
+    },
+
+    "Cisco Certified Network Associate (CCNA)": {
+      outcome: "foundational networking skills",
+      hours: "200",
+      coverage: [
+        "Networking Fundamentals",
+        "IP Addressing and Subnetting",
+        "Routing and Switching Basics",
+        "VLANs and STP",
+        "Network Security Fundamentals",
+      ],
+      commitment: "building strong networking fundamentals",
+    },
+
+    "Cisco Certified Network Professional (CCNP)": {
+      outcome:
+        "advanced networking knowledge and skills for enterprise routing and switching",
+      hours: "300",
+      coverage: [
+        "Advanced Routing Protocols",
+        "Enterprise Switching",
+        "WAN Technologies",
+        "Network Security",
+        "Troubleshooting",
+      ],
+      commitment: "mastering enterprise networking concepts",
+    },
+
+    "CompTIA Network+": {
+      outcome: "fundamental networking knowledge and skills",
+      hours: "200",
+      coverage: [
+        "Network Architecture",
+        "Network Operations",
+        "Network Security",
+        "Troubleshooting and Tools",
+      ],
+      commitment: "establishing strong foundational networking knowledge",
+    },
+
+    "Juniper Networks Certified Internet Associate (JNCIA)": {
+      outcome: "juniper network associate level skills",
+      hours: "200",
+      coverage: [
+        "Juniper Device Basics",
+        "Routing Fundamentals",
+        "Switching Basics",
+        "Security Fundamentals",
+      ],
+      commitment: "developing Juniper network skills",
+    },
+
+    "Juniper Networks Certified Internet Specialist (JNCIS)": {
+      outcome: "juniper network specialist level skills",
+      hours: "300",
+      coverage: [
+        "Advanced Routing",
+        "Advanced Switching",
+        "Security and Firewall",
+        "Troubleshooting",
+      ],
+      commitment: "strengthening Juniper enterprise networking expertise",
+    },
+
+    "Juniper Networks Certified Internet Professional (JNCIP)": {
+      outcome: "juniper network professional level skills",
+      hours: "300",
+      coverage: [
+        "Advanced Routing Protocols",
+        "Security Policies",
+        "High Availability",
+        "Network Optimization",
+      ],
+      commitment: "mastering Juniper professional networking skills",
+    },
+
+    "Advanced Cybersecurity Analyst (ACSA)": {
+      outcome: "advanced cybersecurity analyst skills",
+      hours: "300",
+      coverage: [
+        "Threat Analysis",
+        "Security Auditing",
+        "Incident Response",
+        "Cyber Defense Strategies",
+      ],
+      commitment: "enhancing cybersecurity analytical skills",
+    },
+
+    "Microsoft Certified Solutions Associate (MCSA)": {
+      outcome: "fundamental Microsoft solutions knowledge",
+      hours: "200",
+      coverage: [
+        "Windows Server Basics",
+        "Active Directory",
+        "Networking Services",
+        "Security and Administration",
+      ],
+      commitment: "developing Microsoft solutions expertise",
+    },
+
+    "Microsoft Certified Solutions Expert (MCSE)": {
+      outcome: "advanced Microsoft solutions and administration skills",
+      hours: "300",
+      coverage: [
+        "Advanced Windows Server",
+        "Active Directory Management",
+        "Network Services",
+        "Security and Monitoring",
+      ],
+      commitment: "mastering enterprise Microsoft solutions",
+    },
+
+    "Microsoft Azure Fundamentals (AZ-900)": {
+      outcome: "fundamentals of Microsoft Azure cloud services",
+      hours: "120",
+      coverage: [
+        "Azure Core Services",
+        "Cloud Concepts",
+        "Security Basics",
+        "Pricing and Support",
+      ],
+      commitment: "gaining foundational Azure knowledge",
+    },
+
+    "Microsoft Azure Administrator (AZ-104)": {
+      outcome: "skills to manage and administer Azure cloud services",
+      hours: "200",
+      coverage: [
+        "Azure Virtual Networks",
+        "Resource Management",
+        "Identity and Security",
+        "Monitoring and Troubleshooting",
+      ],
+      commitment: "developing practical Azure administration skills",
+    },
+
+    "Microsoft Azure Solutions Architect (AZ-305)": {
+      outcome: "designing and implementing Azure solutions",
+      hours: "300",
+      coverage: [
+        "Solution Design",
+        "Architecture Patterns",
+        "Security and Compliance",
+        "Monitoring and Optimization",
+      ],
+      commitment: "mastering Azure architecture and solutions",
+    },
+
+    "Microsoft 365 Fundamentals (MS-900)": {
+      outcome: "foundations of Microsoft 365 services",
+      hours: "120",
+      coverage: [
+        "Microsoft 365 Core Services",
+        "Security and Compliance",
+        "Collaboration Tools",
+        "Licensing and Administration",
+      ],
+      commitment: "building Microsoft 365 foundational knowledge",
+    },
+
+    "Microsoft 365 Security Administrator (MS-500)": {
+      outcome: "Microsoft 365 security administrator skills",
+      hours: "200",
+      coverage: [
+        "Identity and Access Management",
+        "Threat Protection",
+        "Information Protection",
+        "Compliance Management",
+      ],
+      commitment: "enhancing Microsoft 365 security expertise",
+    },
+
+    "Amazon Web Services (AWS)": {
+      outcome: "understanding of AWS cloud services and architecture",
+      hours: "200",
+      coverage: [
+        "AWS Core Services",
+        "Cloud Architecture",
+        "Security in AWS",
+        "Monitoring and Cost Management",
+      ],
+      commitment: "developing expertise in AWS cloud technologies",
+    },
+
+    "Google Cloud Platform (GCP)": {
+      outcome: "understanding Google Cloud infrastructure and services",
+      hours: "200",
+      coverage: [
+        "GCP Core Services",
+        "Cloud Infrastructure",
+        "Security and Identity",
+        "Monitoring and Logging",
+      ],
+      commitment: "building knowledge in Google Cloud technologies",
+    },
+
+    "VMware Certified Professional (VCP)": {
+      outcome: "VMware virtualization and cloud infrastructure skills",
+      hours: "200",
+      coverage: [
+        "VMware vSphere Fundamentals",
+        "Virtual Networks",
+        "Storage Management",
+        "VM Management and Security",
+      ],
+      commitment: "developing VMware virtualization expertise",
+    },
+
+    "Red Hat Certified System Administrator (RHCSA)": {
+      outcome: "fundamental Linux system administration skills",
+      hours: "200",
+      coverage: [
+        "Linux Installation",
+        "File Systems and Storage",
+        "User and Permission Management",
+        "Networking Basics",
+      ],
+      commitment: "developing practical Linux administration skills",
+    },
+
+    "Red Hat Certified Engineer (RHCE)": {
+      outcome: "advanced Linux administration and network services management",
+      hours: "300",
+      coverage: [
+        "Advanced Linux Administration",
+        "Networking Services",
+        "Security and Firewall",
+        "Automation",
+      ],
+      commitment: "mastering enterprise Linux administration",
+    },
+
+    "Project Management Professional (PMP)": {
+      outcome: "knowledge and skills to manage projects effectively",
+      hours: "180",
+      coverage: [
+        "Project Scope Management",
+        "Time and Cost Management",
+        "Risk Management",
+        "Stakeholder Management",
+      ],
+      commitment: "leading projects successfully",
+    },
+
+    "ITIL Foundation": {
+      outcome: "understanding IT service management and ITIL framework",
+      hours: "120",
+      coverage: [
+        "IT Service Lifecycle",
+        "Service Strategy",
+        "Service Operation",
+        "Continual Service Improvement",
+      ],
+      commitment: "building IT service management knowledge",
+    },
+  };
+
+  const courseSelect = document.getElementById("courseSelect");
+
+  courseSelect.addEventListener("change", function () {
+    const selected = this.value;
+    const data = courseData[selected];
+
+    if (!data) return;
+
+    document.querySelector("[name='course_outcome']").value = data.outcome;
+    document.querySelector("[name='training_hours']").value = data.hours;
+    document.querySelector("[name='commitment_to']").value = data.commitment;
+
+    tagify.removeAllTags();
+    tagify.addTags(data.coverage);
+
+    updatePreview();
+  });
+
+  const form = document.getElementById("certificateForm");
+
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    loadingOverlay.classList.remove("hidden"); // show loader
+
+    const formData = new FormData(form);
+    formData.set(
+      "course_coverage",
+      JSON.stringify(tagify.value.map((t) => t.value)),
+    );
+
+    fetch("{% url 'certificate_generator' %}", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+          .value,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          // throw a simple error to show in alert
+          throw new Error("Certificate generation failed");
+        }
+        return res.text();
+      })
+      .then((msg) => {
+        loadingOverlay.classList.add("hidden");
+        showAlert(msg, "success"); // success alert
+        setTimeout(() => location.reload(), 2000);
+      })
+      .catch((err) => {
+        loadingOverlay.classList.add("hidden");
+        showAlert(err.message, "error"); // clean error alert
+      });
+  });
+
+  form.addEventListener("input", debouncedPreview);
+</script>
+
+{% endblock %}

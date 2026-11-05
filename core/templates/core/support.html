@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Support - Kalikote Group{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="relative bg-brand-600 text-white">
+  <div class="max-w-6xl mx-auto px-6 py-24 text-center" data-aos="fade-up">
+    <h1 class="text-4xl md:text-5xl font-extrabold">We’re Here to Help</h1>
+    <p class="mt-4 text-lg text-slate-100">
+      24/7 enterprise-grade support for servers, networks, automation, cloud, and security.
+    </p>
+  </div>
+</section>
+
+<!-- Contact Options -->
+<section class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-brand-800 text-center" data-aos="fade-up">Get Support</h2>
+    <p class="mt-3 text-slate-600 text-center" data-aos="fade-up" data-aos-delay="150">
+      Choose the best way to reach our experts.
+    </p>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-slate-50 rounded-2xl shadow-soft p-8 text-center hover:shadow-md transition" data-aos="zoom-in">
+        <div class="text-4xl mb-3">📩</div>
+        <h3 class="text-lg font-semibold text-brand-700">Email Support</h3>
+        <p class="mt-2 text-slate-600">yugen@kalikote.com</p>
+      </div>
+      <div class="bg-slate-50 rounded-2xl shadow-soft p-8 text-center hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="100">
+        <div class="text-4xl mb-3">🎫</div>
+        <h3 class="text-lg font-semibold text-brand-700">Open a Ticket</h3>
+        <p class="mt-2 text-slate-600">Track issues with our ticketing system.</p>
+      </div>
+      <div class="bg-slate-50 rounded-2xl shadow-soft p-8 text-center hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="200">
+        <div class="text-4xl mb-3">📞</div>
+        <h3 class="text-lg font-semibold text-brand-700">Call Us</h3>
+        <p class="mt-2 text-slate-600">+977-9815334269</p>
+      </div>
+      <div class="bg-slate-50 rounded-2xl shadow-soft p-8 text-center hover:shadow-md transition" data-aos="zoom-in" data-aos-delay="300">
+        <div class="text-4xl mb-3">💬</div>
+        <h3 class="text-lg font-semibold text-brand-700">Live Chat</h3>
+        <p class="mt-2 text-slate-600">Instant help from our experts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-brand-800 text-center" data-aos="fade-up">Frequently Asked Questions</h2>
+    <div class="mt-12 space-y-6">
+      <div class="bg-white rounded-2xl shadow-soft p-6" data-aos="fade-up">
+        <h3 class="text-lg font-semibold text-brand-700">How quickly do you respond to support requests?</h3>
+        <p class="mt-2 text-slate-600">Our team responds within 1 hour for priority issues and within 24 hours for standard requests.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-soft p-6" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="text-lg font-semibold text-brand-700">Do you provide 24/7 monitoring?</h3>
+        <p class="mt-2 text-slate-600">Yes, we offer continuous monitoring for enterprise systems including servers, networks, and cloud platforms.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-soft p-6" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-lg font-semibold text-brand-700">Can you support hybrid or multi-cloud environments?</h3>
+        <p class="mt-2 text-slate-600">Absolutely. We provide end-to-end support across AWS, Azure, GCP, and on-premise infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-brand-600 text-center text-white">
+  <h2 class="text-3xl font-bold" data-aos="fade-up">Need urgent support?</h2>
+  <p class="mt-3 text-lg text-slate-100" data-aos="fade-up" data-aos-delay="200">
+    Our engineers are always ready to assist.
+  </p>
+  <a href="/contact" class="mt-6 inline-block btn-light" data-aos="zoom-in">Contact Us Now</a>
+</section>
+{% endblock %}

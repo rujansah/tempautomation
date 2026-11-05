@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}VPS Hosting - Kalikote Group{% endblock %}
+
+{% block content %}
+
+<section class="py-24 bg-gradient-to-b from-slate-50 to-white">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center">
+        <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight">
+            VPS Hosting Plans
+        </h1>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto text-lg">
+            Enterprise-grade VPS hosting with lightning-fast SSD, full root access, and scalable infrastructure.
+        </p>
+    </div>
+
+    <!-- Highlights - Modern Expanded -->
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center">
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-indigo-100 flex items-center justify-center text-2xl shadow-md">
+        ⚡
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">99.9% Uptime</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-blue-100 flex items-center justify-center text-2xl shadow-md">
+        💾
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">NVMe SSD</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center text-2xl shadow-md">
+        🛠
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">24/7 Support</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-purple-100 flex items-center justify-center text-2xl shadow-md">
+        🚀
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">Instant Setup</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-red-100 flex items-center justify-center text-2xl shadow-md">
+        🔑
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">Full Root Access</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-lg border border-slate-200 hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-105">
+        <div class="w-16 h-16 mx-auto rounded-full bg-yellow-100 flex items-center justify-center text-2xl shadow-md">
+        ⚙️
+        </div>
+        <p class="mt-4 font-semibold text-slate-900 text-lg">Customizable Configuration</p>
+    </div>
+
+    </div>
+
+    <!-- Toggle -->
+    <div class="mt-14 flex justify-center items-center gap-4">
+      <span class="text-sm text-slate-600">Monthly</span>
+
+      <button id="toggleBtn"
+        class="relative w-16 h-8 bg-slate-300 rounded-full transition flex items-center px-1">
+        <div id="toggleCircle"
+          class="w-6 h-6 bg-white rounded-full shadow-md transform transition">
+        </div>
+      </button>
+
+      <span class="text-sm text-slate-600">Yearly</span>
+    </div>
+
+    <!-- Plans -->
+    {% for cat in vps_categories %}
+    <div class="mt-20">
+        <div class="text-center">
+            <div class="flex items-center justify-center mb-12">
+                <div class="h-px w-16 bg-gradient-to-r from-transparent to-indigo-400"></div>
+
+                    <h2 class="mx-4 text-3xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent tracking-tight">
+                        {{ cat.category }}
+                    </h2>
+
+                <div class="h-px w-16 bg-gradient-to-l from-transparent to-indigo-400"></div>
+            </div>
+        </div>
+
+      <div class="grid gap-10 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-center">
+
+        {% for plan in cat.plans %}
+        <div class="relative group w-full max-w-sm mx-auto">
+
+          <!-- Glow -->
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl blur opacity-0 group-hover:opacity-40 transition"></div>
+
+          <!-- Card -->
+          <div class="relative bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl transition">
+
+            <!-- Badge -->
+            {% if plan.name == "Standard" %}
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs bg-indigo-600 text-white px-4 py-1 rounded-full shadow">
+              Most Popular
+            </span>
+            {% elif plan.name == "Premium" %}
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-1 rounded-full shadow">
+              Best Value
+            </span>
+            {% endif %}
+
+            <!-- Title -->
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-slate-900">
+                {{ plan.name }}
+                </h3>
+            </div>
+
+            <!-- Price -->
+            <div class="mt-5 flex flex-col items-center gap-1">
+
+            <!-- Price Row -->
+            <div class="flex items-end justify-center gap-2 flex-wrap">
+                <span class="text-3xl md:text-4xl font-extrabold text-slate-900 price whitespace-nowrap"
+                    data-month="{{ plan.price_monthly }}"
+                    data-year="{{ plan.price_yearly }}">
+                NPR {{ plan.price_monthly|intcomma }}
+                </span>
+
+                <span class="text-sm text-slate-500 mb-1 duration">
+                /mo
+                </span>
+            </div>
+
+            <!-- Save Badge -->
+            <span class="text-xs font-semibold text-green-600 bg-green-100 px-3 py-1 rounded-full hidden save-badge">
+                Save 0%
+            </span>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="my-6 border-t border-slate-200"></div>
+
+            <!-- Specs -->
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li>✔ <b>{{ plan.specs.storage }}</b> SSD Storage</li>
+              <li>✔ <b>{{ plan.specs.ram }}</b> RAM</li>
+              <li>✔ <b>{{ plan.specs.cpu }}</b> CPU Cores</li>
+              <li>✔ {{ plan.specs.ip }}</li>
+              <li>✔ {{ plan.specs.os }}</li>
+            </ul>
+
+            <!-- CTA -->
+            <a href="/contact"
+              class="mt-8 block text-center py-3 rounded-xl font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:opacity-90 transition shadow-md">
+              Get Started →
+            </a>
+
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- Comparison Table -->
+    <div class="text-center">
+        <div class="mt-24">
+        <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 mb-8">
+        Compare Plans
+        </h2>
+        <p class="text-slate-500 mb-6 max-w-xl mx-auto">
+        See a side-by-side comparison of all VPS plans to choose the perfect fit for your needs.
+        </p>
+        <div class="h-1 w-24 mx-auto bg-gradient-to-r from-indigo-600 to-blue-500 rounded-full mb-10"></div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+            <table class="w-full text-sm">
+            <thead class="bg-slate-100 text-slate-700">
+                <tr>
+                <th class="p-5">Plan</th>
+                <th>RAM</th>
+                <th>Storage</th>
+                <th>CPU</th>
+                <th>IP</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                {% for cat in vps_categories %}
+                {% for plan in cat.plans %}
+                <tr class="border-t hover:bg-slate-50 transition">
+                    <td class="p-4 font-semibold">{{ plan.name }}</td>
+                    <td>{{ plan.specs.ram }}</td>
+                    <td>{{ plan.specs.storage }}</td>
+                    <td>{{ plan.specs.cpu }}</td>
+                    <td>{{ plan.specs.ip }}</td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Toggle Script -->
+<script>
+    let isYearly = false;
+
+const toggleBtn = document.getElementById("toggleBtn");
+const toggleCircle = document.getElementById("toggleCircle");
+
+const prices = document.querySelectorAll(".price");
+const durations = document.querySelectorAll(".duration");
+const saveBadges = document.querySelectorAll(".save-badge");
+
+toggleBtn.addEventListener("click", () => {
+  isYearly = !isYearly;
+
+  toggleCircle.classList.toggle("translate-x-8");
+  toggleBtn.classList.toggle("bg-indigo-500");
+
+  prices.forEach((p, index) => {
+  const month = parseFloat(p.getAttribute("data-month"));
+  const year = parseFloat(p.getAttribute("data-year"));
+
+  // keep your original logic EXACTLY
+  const value = isYearly ? year : month;
+
+  p.textContent = "NPR " + value.toLocaleString("en-IN");
+
+  durations[index].textContent = isYearly ? "/yr" : "/mo";
+
+  // ✅ calculate discount WITHOUT affecting display
+  const yearlyCostIfMonthly = month * 12;
+
+  let discount = 0;
+  if (yearlyCostIfMonthly > 0) {
+    discount = Math.round(
+      ((yearlyCostIfMonthly - year) / yearlyCostIfMonthly) * 100
+    );
+  }
+
+  // ✅ only show badge, DO NOT modify price
+  if (isYearly && discount > 0) {
+    saveBadges[index].textContent = `Save ${discount}%`;
+    saveBadges[index].classList.remove("hidden");
+  } else {
+    saveBadges[index].classList.add("hidden");
+  }
+});
+});
+</script>
+
+{% endblock %}

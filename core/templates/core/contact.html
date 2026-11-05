@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Contact Us - Kalikote Group{% endblock %}
+
+{% block content %}
+<section class="py-20 gradient-bg">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="rounded-3xl p-8 bg-white shadow-soft" data-aos="fade-up">
+      <h1 class="text-3xl font-bold text-brand-800">Contact Us</h1>
+      <p class="mt-2 text-slate-600">We’d love to hear from you! Fill the form and our team will reach out.</p>
+
+      <form method="post" action="{% url 'contact' %}" class="mt-6 grid gap-4">
+        {% csrf_token %}
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="name" name="name" type="text" placeholder="Your Name" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+          <input id="email" name="email" type="email" placeholder="Email" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+        </div>
+        <input id="subject" name="subject" type="text" placeholder="Subject" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none" />
+        <textarea id="message" name="message" rows="5" placeholder="Message" class="w-full rounded-xl border border-slate-200 px-4 py-3 focus:ring-2 focus:ring-brand-300 focus:outline-none"></textarea>
+        <button type="submit" class="mt-4 flex justify-center items-center rounded-2xl px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-soft">
+        Send Message
+      </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
