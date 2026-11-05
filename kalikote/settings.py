@@ -147,22 +147,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ]
 
 CONTACT_RECIPIENT_EMAILS = [
-    "rujansah00@gmail.com",
+    "kgtechsolutions9@gmail.com",
     "rujansah26@gmail.com",
 ]
 
 CERTIFICATE_RECIPIENT_EMAILS = [
-    "rujansah00@gmail.com",
+    "kgtechsolutions9@gmail.com",
     "rujansah26@gmail.com",
 ]
-# # email settings for testing in hp
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'aws.rujan@gmail.com'
-# EMAIL_HOST_PASSWORD = 'ikrk hzii wadk hmal'
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 # testing for yugen sir
 # email settings for testing in hp
